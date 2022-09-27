@@ -1,22 +1,20 @@
 import React from "react";
 
 const Cart = (props) => {
-  let { cart } = props;
-  let drink;
-  let ingredient;
-  let description;
-  for (let product of cart) {
-    console.log(product);
-    drink = product.strDrink;
-    ingredient = product.strIngredient3;
-    description = product.strInstructionsES;
-  }
+  let { cart, removeCocktail } = props;
+
   return (
-    <div className="text-white">
-      <h5>{}</h5>
-      <p>Drink: {drink}</p>
-      <p>Ingredient: {ingredient}</p>
-      <p>Description: {description}</p>
+    <div className="text-white mb-4">
+      <img className="container-fluid mb-3" src={cart.strDrinkThumb} alt="" />
+      <p>Drink: {cart.strDrink}</p>
+      <p>Ingredient: {cart.strIngredient1}</p>
+      <p>Description: {cart.strInstructionsDE}</p>
+      <button
+        onClick={() => removeCocktail(cart)}
+        className="btn btn-primary container-fluid rounded-5"
+      >
+        Remove
+      </button>
     </div>
   );
 };

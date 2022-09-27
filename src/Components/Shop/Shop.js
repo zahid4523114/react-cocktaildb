@@ -14,9 +14,28 @@ const Shop = () => {
 
   let [cart, setCart] = useState([]);
 
-  let addToCart = (cocktail) => {
-    let addedProduct = [...cart, cocktail];
-    setCart(addedProduct);
+  //add items
+  const addToCart = (cocktail) => {
+    let exist = cart.find(
+      (eachCockTail) => eachCockTail.idDrink === cocktail.idDrink
+    );
+    let holdCockTail = [];
+    if (!exist) {
+      holdCockTail = [...cart, cocktail];
+    } else {
+      let rest = cart.filter(
+        (eachCockTail) => eachCockTail.idDrink !== cocktail.idDrink
+      );
+      holdCockTail = [...rest, exist];
+    }
+    // console.log(holdCockTail);
+    setCart(holdCockTail);
+  };
+
+  //remove items
+  let removeCocktail = (cocktail) => {
+    let remove = cart.filter((product) => product.idDrink !== cocktail.idDrink);
+    setCart(remove);
   };
 
   return (
@@ -30,9 +49,11 @@ const Shop = () => {
           ></Cocktail>
         ))}
       </div>
-      <div className="cart-container  position-sticky top-0 p-2 h-50 rounded col-3">
+      <div className="cart-container  position-sticky top-0 p-2  overflow-auto rounded col-3">
         <h1 className="text-center text-white ">Cart</h1>
-        <Cart cart={cart}></Cart>
+        {cart.map((item) => (
+          <Cart removeCocktail={removeCocktail} cart={item}></Cart>
+        ))}
       </div>
     </div>
   );
