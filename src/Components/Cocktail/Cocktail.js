@@ -2,7 +2,6 @@ import React from "react";
 import "./Cocktail.css";
 
 const Cocktail = (props) => {
-  //   console.log(props.cocktail);
   let { cocktail, addToCartBtn } = props;
   let { strDrinkThumb, strIngredient2, strGlass, strAlcoholic } = cocktail;
   return (
